@@ -90,6 +90,7 @@ const FormLabel = React.forwardRef<
 >(({ className, ...props }, ref) => {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { error, formItemId } = useFormField();
+  console.log(error)
 
   return (
     <Label ref={ref} className={className} htmlFor={formItemId} {...props} />
@@ -101,7 +102,6 @@ const FormControl = React.forwardRef<
   React.ElementRef<typeof Slot>,
   React.ComponentPropsWithoutRef<typeof Slot>
 >(({ ...props }, ref) => {
- // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { error, formItemId, formDescriptionId, formMessageId } =
     useFormField();
 

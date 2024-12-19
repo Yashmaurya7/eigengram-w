@@ -1,7 +1,7 @@
 import { authOptions } from '@/lib/auth'
 import { getServerSession } from 'next-auth'
 import React from 'react'
- import { useRouter } from 'next/navigation'
+
 const page=async ()=> { 
     
     

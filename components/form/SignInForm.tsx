@@ -9,7 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from '../ui/form';
-import { useState } from 'react';
+ 
 import * as z from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod" ;
 import { Input } from '../ui/input';
@@ -55,7 +55,7 @@ const {toast}=useToast()
    }
    else{
    
-    router.push('/admin')
+    router.push('/dashboard')
     router.refresh()
 
    }

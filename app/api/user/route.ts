@@ -46,15 +46,18 @@ export async function POST(req:Request){
                 phoneNumber:phonenumber
             }
         });
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
         const {password:newUserPassword ,...rest}=newUser;
         return NextResponse.json({
             user:rest,message:"User Created succesfully"
         },{status:201});
     }
     catch(error){
+        console.log(error)
         return NextResponse.json({
         message:"something went wrong"
         },{status:500});
+        
     }
    
 }
