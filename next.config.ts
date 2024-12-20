@@ -6,9 +6,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'assets.example.com',
+        hostname: 'images.squarespace-cdn.com',
         port: '',
-        pathname: '/account123/**',
+        pathname: '*',
         search: '',
       },
     ],

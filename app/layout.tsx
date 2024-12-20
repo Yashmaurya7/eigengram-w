@@ -56,9 +56,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <Provider>
           <div className="h-screen flex flex-col">
+            {/* Navbar is fixed, so account for its height */}
             <Navbar />
-            {/* Let children define their own layout */}
-            {children}
+            <main className="flex-grow pt-16">{/* Account for navbar height */}
+              {children}
+            </main>
           </div>
           <Toaster />
         </Provider>

@@ -2,6 +2,9 @@ import { db } from "@/lib/db";
 import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
 import * as z from 'zod';
+import { promisify } from "util";
+const resolveMx = promisify(dns.resolveMx);
+import dns from "dns";
 const userSchema = z
   .object({
     username: z.string().min(1, 'Username is required').max(100),
@@ -14,16 +17,37 @@ const userSchema = z
       .string()
       .min(10, { message: 'Must be a valid mobile number' })
       .max(14, { message: 'Must be a valid mobile number' }),
+    name: z.string().min(1, 'Username is required').max(100),
 
   })
+  async function isDomainValid(email: string): Promise<boolean> {
+    const domain = email.split("@")[1]; // Extract domain from email
+    try {
+      const mxRecords = await resolveMx(domain);
+      return mxRecords && mxRecords.length > 0; // Check if MX records exist
+    } catch (error) {
+      console.error("Domain validation error:", error);
+      return false;
+    }
+  }
+  
+   
  
 export async function POST(req:Request){
     try{
         const body=await req.json();
-        const {email,username,password,phonenumber}=userSchema.parse(body);
+        const {email,username,password,phonenumber,name}=userSchema.parse(body);
         const existingUserByEmail=await db.user.findUnique({
             where:{email:email}
         });
+        const isEmailDomainValid = await isDomainValid(email);
+    if (!isEmailDomainValid) {
+      return NextResponse.json(
+        { user: null, message: "Invalid email domain" },
+        { status: 400 }
+      );
+    }
+
         if(existingUserByEmail){
             return NextResponse.json({
                 user:null,message:"user with this email already exist"
@@ -42,8 +66,10 @@ export async function POST(req:Request){
             data:{
                 username,
                 email,
+                name,
                 password :hashedPassword,
-                phoneNumber:phonenumber
+                phoneNumber:phonenumber,
+                
             }
         });
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

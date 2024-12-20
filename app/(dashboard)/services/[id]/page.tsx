@@ -24,8 +24,9 @@ export async function generateStaticParams() {
 export default async function ServicePage({
   params,
 }: {
-  params: { id: string };
+    params: Promise<{ id: string }>;
 }) {
+ const resolvedParams = await params;
  const session=await getServerSession(authOptions)
  const user=session?.user
 
@@ -42,7 +43,7 @@ export default async function ServicePage({
   }
 
   const service = await db.service.findUnique({
-    where: { id: params.id },
+    where: { id: resolvedParams.id },
     include: {
       subscriptions: {
         where: { userId: dbUser.id },

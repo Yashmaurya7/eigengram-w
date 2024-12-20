@@ -22,6 +22,7 @@ const FormSchema = z
   .object({
     username: z.string().min(1, 'Username is required').max(100),
     email: z.string().min(1, 'Email is required').email('Invalid email'),
+    name : z.string().min(1, 'Username is required').max(100),
     password: z
       .string()
       .min(1, 'Password is required')
@@ -61,7 +62,8 @@ const SignUpForm = () => {
         username:values.username,
         email:values.email,
         password:values.password,
-        phonenumber:values.phonenumber
+        phonenumber:values.phonenumber,
+        name:values.name
     })
     })
     if(response.ok){
@@ -87,6 +89,19 @@ const SignUpForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input placeholder='johndoe' {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+           <FormField
+            control={form.control}
+            name='name'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
                   <Input placeholder='johndoe' {...field} />
                 </FormControl>
