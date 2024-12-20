@@ -39,6 +39,7 @@ import { Inter } from 'next/font/google';
 import { Toaster } from '@/components/ui/toaster';
 import Provider from '@/components/Provider';
 
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -57,10 +58,12 @@ export default function RootLayout({
         <Provider>
           <div className="h-screen flex flex-col">
             {/* Navbar is fixed, so account for its height */}
+            
             <Navbar />
             <main className="flex-grow pt-16">{/* Account for navbar height */}
               {children}
             </main>
+            
           </div>
           <Toaster />
         </Provider>
