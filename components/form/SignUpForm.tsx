@@ -53,6 +53,7 @@ const SignUpForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+    
     const response=await fetch('/api/user',{
     method:'POST',
     headers:{

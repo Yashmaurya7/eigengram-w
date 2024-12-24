@@ -11,13 +11,13 @@ import { authOptions } from "@/lib/auth";
 export default async function SearchServicesPage() {
   const session=await getServerSession(authOptions)
   const user =  session?.user;
-
+  
   if (!user) {
     redirect("/");
   }
 
   const dbUser = await db.user.findUnique({
-    where: { username: user.username },
+    where: { email:user.email|| ""  },
   });
 
   if (!dbUser) {

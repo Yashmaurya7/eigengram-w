@@ -60,8 +60,8 @@ type FeatureRequestValues = z.infer<typeof featureRequestSchema>;
 type AccountPageProps = {
   user: {
     id: string;
-    email: string;
-    username: string;
+    email: string|null;
+    username: string|null;
     phoneNumber: string | null;
     name: string | null;
     role: Role;

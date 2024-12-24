@@ -111,7 +111,7 @@ export default async function UserDashboard() {
   }
 
   const dbUser = await db.user.findUnique({
-    where: { username: user.username },
+    where: { email:user.email|| "" },
   });
 
   if (!dbUser) {

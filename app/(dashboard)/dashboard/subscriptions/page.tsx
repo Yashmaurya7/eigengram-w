@@ -7,9 +7,9 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 export default async function SubscribedServices() {
      const session=await getServerSession(authOptions)
-      const username =  session?.user.username;
+      const email =  session?.user.email;
           const existingUser = await db.user.findUnique({
-      where: { username },
+      where: { email:email||"" },
     });
     const userId=existingUser?.id
   const subscriptions = await db.subscription.findMany({

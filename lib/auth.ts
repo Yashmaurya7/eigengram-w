@@ -41,10 +41,13 @@ providers: [
     if(!existingUser){
         return null;
     }
-    const passwordMatch=await compare(credentials.password,existingUser.password);
-    if(!passwordMatch){
-        return null
+    if(existingUser.password){
+        const passwordMatch=await compare(credentials.password,existingUser?.password);
+        if(!passwordMatch){
+            return null
+        }
     }
+   
     return {
         id:existingUser.id,
         username:existingUser.username,

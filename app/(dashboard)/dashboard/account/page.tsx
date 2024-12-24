@@ -14,7 +14,7 @@ const Accounts = async () => {
   }
 
   const dbUser = await db.user.findUnique({
-    where: { username: user.username },
+    where: { email: user.email||"" },
   });
 
   return (
