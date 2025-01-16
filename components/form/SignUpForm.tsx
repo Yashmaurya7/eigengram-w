@@ -49,6 +49,7 @@ const SignUpForm = () => {
       password: '',
       phonenumber:'',
       confirmPassword: '',
+      name:'',
     },
   });
 
